@@ -1,0 +1,11 @@
+.vs
+.vscode
+build
+build-vcxx
+[Dd]ebug
+[Rr]lease
+
+*.o
+*.obj
+*.exe
+*.out
