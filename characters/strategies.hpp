@@ -50,7 +50,7 @@ public:
         return CStatus(current_health, current_atk, current_def); 
     };
     virtual Point       get_move_offset() { 
-        return Point(rand() % 1, rand() % 1); // random move; may chase its target (e.g. Player) in the future
+        return Point(rand() % 3 - 1, rand() % 3 - 1); // random move; may chase its target (e.g. Player) in the future
     }; 
     virtual Character * get_target()              { return target; }
     virtual void        set_target(Character * p) { target = p; }
