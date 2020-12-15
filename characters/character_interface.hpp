@@ -22,7 +22,8 @@ public:
     }; 
 
     friend class CharacterStrategy;
-
+    
+    virtual ~Character() = default;
     virtual CStatus     default_status() = 0;
     virtual CStatus     current_status() = 0;
     virtual bool        is_alive() = 0;

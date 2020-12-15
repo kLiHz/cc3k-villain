@@ -53,14 +53,7 @@ void Chamber::do_something(PlayerCharacter * player)
 
 void Chamber::player_go(PlayerCharacter * player, const Point & dst)
 {
-    bool blocked = false;
-    if (!contains(dst)) blocked = true; 
-    for (auto port : ports) {
-        if (dst == port->position) {
-            blocked = false;
-            break;
-        }
-    }
+    bool blocked = !(contains(dst) || at_port(dst) != nullptr); // walls encountered
     if (blocked) {
         // Todo: unable to move; blocked
         return;
@@ -69,8 +62,10 @@ void Chamber::player_go(PlayerCharacter * player, const Point & dst)
     //blocked = !is_available(dst);
     //if (blocked) return; // round ended;
     player_try_use(player, dst, false);
-    blocked = !is_available(dst);
-    if (!blocked) player->move_to(dst);
+    if (is_available(dst) || at_port(dst) != nullptr) {
+        blocked = false;
+        player->move_to(dst);
+    }
 }
 
 void Chamber::player_attack(PlayerCharacter * player, const Point & dst) {

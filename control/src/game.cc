@@ -18,7 +18,7 @@ void Game::generate_floor() {
 }
 
 bool Game::generate_player() {
-    std::cout << "Choose a race to begin: " << std::endl;
+    std::cout << "Choose a race to begin (s, d, v, t, g): " << std::endl;
     // Todo: race introduction;
     std::string usr_input;
     std::cin >> usr_input; // get user choice;
