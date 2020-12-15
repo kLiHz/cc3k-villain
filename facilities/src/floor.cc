@@ -28,19 +28,20 @@ void Floor::GenerateSampleFloorTerrain() {
     chambers.push_back(
         new Chamber (
             Rect(Point(14,20), 4, 24),
-            { existing_ports["(30,10)"], existing_ports["(32,13)"], existing_ports["(51,12)"] }
+            { existing_ports["(14,21)"], existing_ports["(32,20)"] }
+
         )
     );
     chambers.push_back(
         new Chamber (
             Rect(Point(30,1), 13, 22), 
-            { existing_ports["(67,9)" ] }
+            { existing_ports["(30,10)"], existing_ports["(32,13)"], existing_ports["(51,12)"] }
         )
     );
     chambers.push_back(
         new Chamber(
             Rect(Point(63,3), 7, 15),
-            { existing_ports["(14,21)"], existing_ports["(32,20)"] }
+            { existing_ports["(67,9)" ] }
         )
     );
     Path * p;
