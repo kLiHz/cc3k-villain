@@ -8,7 +8,7 @@
 class Gold : public Item 
 {
 public:
-    enum GoldType {SMALL, NORMAL, MERCHANT_HOARD, DRAGON_HOARD};
+    enum GoldType {SMALL = 0, NORMAL, MERCHANT_HOARD, DRAGON_HOARD};
     static std::vector<std::string> gold_strings;
     Gold(GoldType _type) : Item(Item::GOLD), gold_type(_type) { category_type = _type; }
     virtual int     get_value(){

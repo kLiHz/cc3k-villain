@@ -14,7 +14,7 @@ class CharacterStrategy;
 class Character {
 public:
     enum CharacterType { 
-        PLAYER, SHADE, DROW, VAMPIRE, TROLL, GOBLIN, 
+        PLAYER = 0, SHADE, DROW, VAMPIRE, TROLL, GOBLIN, 
         MERCHANT, HUMAN, DRAGON, DWARF, ELF, ORCS, HALFLING
     };
     enum Attitude { 

@@ -5,7 +5,7 @@
 
 class Item {
 public:
-    enum ItemType {POTION, GOLD};
+    enum ItemType {POTION = 0, GOLD};
     Item(ItemType _type) : type(_type) {}
     virtual void    set_pos(const Point & p) { pos = p; } 
     virtual Point   get_pos() { return pos; };

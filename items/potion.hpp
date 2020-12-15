@@ -7,7 +7,7 @@
 
 class Potion : public Item {
 public:
-    enum PotionType {RH, BA, BD, PH, WA, WD};
+    enum PotionType {RH = 0, BA, BD, PH, WA, WD};
     PotionType potion_type;
     static std::vector<std::string> potion_strings;
     Potion(PotionType p_type) : potion_type(p_type), Item(POTION) { category_type = p_type; }
