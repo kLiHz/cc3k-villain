@@ -24,11 +24,17 @@ Point& Point::operator-=(const Point& p)
     return *this;
 }
 
-bool Point::operator<(const Point & p) const
-{
-    return this->x < p.x && this->y < p.y;
-    //return (abs(this->x) + abs (this->y)) < (abs(p.x) + abs(p.y));
-}
+//bool Point::operator<(const Point & p) const
+//{
+//    auto a = this->x * this->y;
+//    auto b = p.x * p.y;
+//    if (a < b) return true; // e.g. Point(2,6) < Point (6,3)
+//    if (b > a) return false;
+//    if (*this == p) return false; // e.g. Point(1, 1) == Point(1, 1)
+//    return (1000 * x + y) < (1000 * p.x + p.y); // e.g. Point(1,5) < Point(5,1)
+//}
+
+
 
 bool Point::operator==(const Point & p) const {
     return this->x == p.x && this->y == p.y;
@@ -70,9 +76,9 @@ Point Rect::br()
 }
 
 bool Rect::contains(const Point & p) {
-    return (!(p < base)) && (p < this->br());
-    //return base.x <= p.x && p.x <= base.x + width 
-    //    && base.y <= p.y && p.y <= base.y + height;
+    //return (!(p < base)) && (p < this->br());
+    return base.x <= p.x && p.x <= base.x + width 
+        && base.y <= p.y && p.y <= base.y + height;
 }
 
 int Rect::area() { return width * height; }

@@ -9,3 +9,4 @@ build-vcxx
 *.obj
 *.exe
 *.out
+cc3k

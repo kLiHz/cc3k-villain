@@ -7,11 +7,11 @@ class Chamber;
 
 class Port {
 public:
-    Chamber * the_chamber;
-    Path * the_path;
+    Chamber * the_chamber = nullptr;
+    Path * the_path = nullptr;
     Point position;
-    Port() {}
-    ~Port() {}
+    Port() = default;
+    ~Port() = default;
     Port(int _row, int _col) : position(_row, _col) {}
     Port(const Point & pos) : position(pos) {}
 };

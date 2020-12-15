@@ -2,74 +2,74 @@
 
 void Floor::GenerateSampleFloorTerrain() {
     // std::map use to avoid redefination
-    std::map<Point, Port *> existing_ports;
-    existing_ports[Point(6,5)  ] = new Port(6,5);
-    existing_ports[Point(10,5) ] = new Port(10,5);
-    existing_ports[Point(25,10)] = new Port(25,10);
-    existing_ports[Point(12,18)] = new Port(12,18);
-    existing_ports[Point(30,10)] = new Port(30,10);
-    existing_ports[Point(32,13)] = new Port(32,13);
-    existing_ports[Point(51,12)] = new Port(51,12);
-    existing_ports[Point(67,9) ] = new Port(67,9);
-    existing_ports[Point(14,21)] = new Port(14,21);
-    existing_ports[Point(32,20)] = new Port(32,20);
+    std::map<std::string, Port *> existing_ports;
+    existing_ports["(6,5)"  ] = new Port(6,5);
+    existing_ports["(10,5)" ] = new Port(10,5);
+    existing_ports["(25,10)"] = new Port(25,10);
+    existing_ports["(12,18)"] = new Port(12,18);
+    existing_ports["(30,10)"] = new Port(30,10);
+    existing_ports["(32,13)"] = new Port(32,13);
+    existing_ports["(51,12)"] = new Port(51,12);
+    existing_ports["(67,9)" ] = new Port(67,9);
+    existing_ports["(14,21)"] = new Port(14,21);
+    existing_ports["(32,20)"] = new Port(32,20);
     chambers.push_back(
         new Chamber(
             Rect(Point(1,1),10,6), 
-            { existing_ports[Point(6,5)] }
+            { existing_ports["(6,5)"] }
         )
     );
     chambers.push_back(
         new Chamber(
             Rect(Point(10,4), 15, 16), 
-            { existing_ports[Point(10,5)], existing_ports[Point(25,10)], existing_ports[Point(12,18)] }
+            { existing_ports["(10,5)"], existing_ports["(25,10)"], existing_ports["(12,18)"] }
         )
     );
     chambers.push_back(
         new Chamber (
             Rect(Point(14,20), 4, 24),
-            { existing_ports[Point(30,10)], existing_ports[Point(32,13)], existing_ports[Point(51,12)] }
+            { existing_ports["(30,10)"], existing_ports["(32,13)"], existing_ports["(51,12)"] }
         )
     );
     chambers.push_back(
         new Chamber (
             Rect(Point(30,1), 13, 22), 
-            { existing_ports[Point(67,9) ] }
+            { existing_ports["(67,9)" ] }
         )
     );
     chambers.push_back(
         new Chamber(
             Rect(Point(63,3), 7, 15),
-            { existing_ports[Point(14,21)], existing_ports[Point(32,20)] }
+            { existing_ports["(14,21)"], existing_ports["(32,20)"] }
         )
     );
     Path * p;
     p = new Path(); 
     p->add_line( Line(Point(6,5), Point(10,5)) );
-    p->add_port( existing_ports[Point(6,5)] );
-    p->add_port( existing_ports[Point(10,5)] );
+    p->add_port( existing_ports["(6,5)"] );
+    p->add_port( existing_ports["(10,5)"] );
     path.push_back(p);
     p = new Path();
     p->add_line( Line( Point(12,18), Point(12,21) ) );
     p->add_line( Line( Point(12,21), Point(14,21) ) );
-    p->add_port( existing_ports[Point(12,18)] );
-    p->add_port( existing_ports[Point(14,21)] );
+    p->add_port( existing_ports["(12,18)"] );
+    p->add_port( existing_ports["(14,21)"] );
     path.push_back(p);
     p = new Path();
     p->add_line( Line( Point(25,10), Point(30,10) ) );
-    p->add_port( existing_ports[Point(25,10)] );
-    p->add_port( existing_ports[Point(30,10)] );
+    p->add_port( existing_ports["(25,10)"] );
+    p->add_port( existing_ports["(30,10)"] );
     path.push_back(p);
     p = new Path();
     p->add_line( Line( Point(32,13), Point(32,20) ) );
-    p->add_port( existing_ports[Point(32,13)] );
-    p->add_port( existing_ports[Point(32,20)] );
+    p->add_port( existing_ports["(32,13)"] );
+    p->add_port( existing_ports["(32,20)"] );
     path.push_back(p);
     p = new Path();
     p->add_line( Line( Point(51,12), Point(67,12) ) );
     p->add_line( Line( Point(67,12), Point(67,9)  ) );
-    p->add_port( existing_ports[Point(51,12)] );
-    p->add_port( existing_ports[Point(67,9) ] );
+    p->add_port( existing_ports["(51,12)"] );
+    p->add_port( existing_ports["(67,9)" ] );
     path.push_back(p);
 }
 
