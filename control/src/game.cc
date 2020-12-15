@@ -40,7 +40,7 @@ bool Game::generate_player() {
     return true;
 }
 
-void Game::usr_command() {
+bool Game::usr_command() {
     std::string usr_cmd;
     while ( usr_cmd.empty() ) {
         std::getline(std::cin, usr_cmd);
@@ -53,20 +53,20 @@ void Game::usr_command() {
     // if the command input phase is going to be simplified in the future,
     // probabaly i'll store PC's previous 'offset' and do the op again
     // functions like getch() might also be use.
-    if ( i == usr_cmd.end() ) return usr_command(); 
+    if ( i == usr_cmd.end() ) return false; 
     switch (*i) // first parse: get possible command
     {
     case 'h': 
         show_help(); ++i; 
-        return usr_command(); // get PC's command again.
+        return false; // get PC's command again.
         break;
     case 'q': 
         quit_game(); ++i; 
-        going_to_do = QUIT; return;
+        going_to_do = QUIT;
         break;
     case 'r': 
         restart(); ++i; 
-        going_to_do = RESTART; return;
+        going_to_do = RESTART;
         break;
     case 'f':
         going_to_do = FREEZE; ++i;
@@ -94,7 +94,7 @@ void Game::usr_command() {
             case ' ': case '\t': break; //ignore space;
             default: // illegal input, e.g. 'nx'
                 std::cout << "Illegal command! \n";
-                return usr_command(); 
+                return false; 
                 break;
             }
         } else move_offset = Point(0, -1);
@@ -109,7 +109,7 @@ void Game::usr_command() {
             case ' ': case '\t': break; //ignore space;
             default: // illegal input, e.g. 'sx'
                 std::cout << "Illegal command! \n";
-                return usr_command(); 
+                return false; 
                 break;
             }
         } else move_offset = Point(0, +1);
@@ -122,7 +122,7 @@ void Game::usr_command() {
             case ' ': case '\t': break; //ignore space;
             default: // illegal input, e.g. 'sx'
                 std::cout << "Illegal command! \n";
-                return usr_command(); 
+                return false; 
                 break;
             }
         } else move_offset = Point(-1, 0);
@@ -135,14 +135,14 @@ void Game::usr_command() {
             case ' ': case '\t': break; //ignore space;
             default: // illegal input, e.g. 'sx'
                 std::cout << "Illegal command! \n";
-                return usr_command(); 
+                return false; 
                 break;
             }
         } else move_offset = Point(+1, 0);
         break;
     default: // either not command nor direction -> illegal input
         std::cout << "Illegal command! \n";
-        return usr_command(); 
+        return false; 
         break;
     }
     switch(going_to_do) {
@@ -160,4 +160,5 @@ void Game::usr_command() {
         break;
     default: break;
     }
+    return true;
 }

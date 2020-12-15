@@ -40,6 +40,7 @@ public:
     Line();
     Line(const Point& a, const Point& b) : begin(a), end(b) {}
     bool cross(const Point& p);
+    bool contains(const Point& p);
 };
 
 #endif

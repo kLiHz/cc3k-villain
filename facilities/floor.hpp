@@ -30,13 +30,13 @@ public:
     void player_use(const Point & dst);
     bool at_stair();
 private:
-    PlayerCharacter *       player = nullptr;
-    std::vector<Chamber *>  chambers;       // managed by 'floor'
-    std::list<Path *>       path;           // managed by 'floor'
-    Chamber *               the_chamber;    
-    Path *                  the_path;       
-    Port *                  the_port;       
-    Port *                  stairs;         // managed by 'floor'
+    PlayerCharacter *       player      = nullptr;
+    std::vector<Chamber *>  chambers;   // managed by 'floor'
+    std::list<Path *>       path;       // managed by 'floor'
+    Chamber *               the_chamber = nullptr;    
+    Path *                  the_path    = nullptr;       
+    Port *                  the_port    = nullptr;       
+    Port *                  stairs;     // managed by 'floor'
     bool                    is_frozen = false;
     enum Where {CHAMBER, PORT, PATH};
     Where player_where = Where::CHAMBER;

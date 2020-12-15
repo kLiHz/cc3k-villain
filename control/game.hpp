@@ -22,7 +22,7 @@ class Game
     bool        color_output = false;
     void        welcome();
     void        show_help();
-    void        usr_command();
+    bool        usr_command();
     bool        generate_player();
     void        generate_floor();
 public:
@@ -56,7 +56,7 @@ public:
         display->draw(floor);
         display->show(player);
         while (playing) {
-            usr_command();
+            while(!usr_command());
             if (floor->at_stair()) {
                 ++floor_num;
                 if (floor_num > floor_max_num) {

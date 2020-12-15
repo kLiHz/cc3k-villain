@@ -180,7 +180,8 @@ void Floor::player_go(const Point & dst)
     {
     case CHAMBER:
         the_chamber->player_go(player, dst);
-        if ( (the_port = (the_chamber->at_port(player->get_position()))) ) {
+        the_port = the_chamber->at_port(player->get_position());
+        if ( the_port ) {
             player_where = PORT;
             the_chamber = nullptr;
         }
@@ -189,6 +190,7 @@ void Floor::player_go(const Point & dst)
         if (the_port->the_chamber->contains(dst)) {
             player_where = CHAMBER;
             the_chamber = the_port->the_chamber;
+            the_port = nullptr;
             player->move_to(dst);
         }
         else if (the_port->the_path->contains(dst)) {
@@ -202,16 +204,18 @@ void Floor::player_go(const Point & dst)
         }
         break;
     case PATH:
-        if ((the_port = the_path->at_port(dst))) {
-            player_where = PORT;
-            the_path = nullptr;
-        }
-        else if (the_path->contains(dst)) {
+        if (the_path->contains(dst)) {
             //player_where = PATH;
             player->move_to(dst);
-        }
+        } 
         else {
             // TODO: blocked; illegal move;
+        }
+        // similar to 'the_path->player_go()', refers to 'the_chamber->player_go()'
+        the_port = the_path->at_port(dst);
+        if (the_port) {
+            player_where = PORT;
+            the_path = nullptr;
         }
         break;
     default: break;

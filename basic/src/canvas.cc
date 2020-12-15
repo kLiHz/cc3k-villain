@@ -90,6 +90,7 @@ void Canvas::draw(const Rect & rt, char c)
         }
 }
 
+// horizontal/vertical line supported only!
 void Canvas::draw(const Line & ln, char c)
 {
     if (ln.begin.x == ln.end.x) { //vertical
