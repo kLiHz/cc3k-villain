@@ -9,20 +9,14 @@
 
 class CharacterStrategy;
 
-class Character : public CharacterInterface
+class RealCharacter : public Character
 {
 public:
     friend class Display;
-    enum CharacterType { 
-        PLAYER, SHADE, DROW, VAMPIRE, TROLL, GOBLIN, 
-        MERCHANT, HUMAN, DRAGON, DWARF, ELF, ORCS, HALFLING
-    };
-    enum Attitude { 
-        ALLY, NEUTRAL, HOSTILE
-    }; 
+
     static std::vector<std::string> character_strings;
 
-    virtual ~Character();
+    virtual ~RealCharacter();
     virtual CStatus     default_status();
     virtual CStatus     current_status();
     virtual bool        is_alive();
@@ -33,17 +27,19 @@ public:
     virtual Point       get_position();  
     virtual void        set_target(Character * target);
     virtual Character * get_target();
-    CharacterStrategy * get_strategy();
+    virtual CharacterStrategy * get_strategy();
     virtual bool        is_hostile();
     virtual void        move_to(const Point & dst);
     virtual Item*       drop_reward();
     virtual void        one_turn();
     virtual void        debuff();
-
-    CharacterType   type;
-    CStatus         org_status;
-    int             gold_in_hand;
+    virtual CharacterType get_type();
+    virtual int         gold_amount();
+    virtual void        gold_change(int amount);
 protected:
+    CStatus         org_status;
+    CharacterType   type;
+    int             my_gold;
     Attitude        attitude;
     Point           position;
     int             default_hp;     // default health points; HP, stands for Health Points or Hit Points
@@ -53,9 +49,9 @@ protected:
     //CharacterStrategy::StrategyType strategy_type = CharacterStrategy::DEFAULT;
     // Note: adding buff to a character can also be designed as a decorator
 
-    Character(int _hp, int _atk, int _def, CharacterType _type)
+    RealCharacter(int _hp, int _atk, int _def, CharacterType _type)
     : default_hp(_hp), default_atk(_atk), default_def(_def), type(_type), strategy(nullptr) {
-        gold_in_hand = 0;
+        my_gold = 0;
     }
 };
 

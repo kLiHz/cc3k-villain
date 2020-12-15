@@ -4,7 +4,7 @@ void Display::show(PlayerCharacter * player) {
     // Show Screen
     screen->display();
     // Show Player Character's Status
-    std::cout << "Race: " << Character::character_strings[player->type];
+    std::cout << "Race: " << RealCharacter::character_strings[player->get_type()];
     std::cout << "\tGold: " << player->gold_amount() << '\n';
     auto status = player->current_status();
     std::cout << "HP: " << status.health << '\n';

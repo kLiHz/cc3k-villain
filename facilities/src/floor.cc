@@ -167,7 +167,7 @@ void Floor::initialize() {
 
 // regular update each turn
 void Floor::do_something() {
-    player->do_something();
+    player->one_turn();
     for (auto chamber : chambers) {
         if (!is_frozen) chamber->do_something(player);
     }

@@ -41,7 +41,7 @@ Port * Chamber::at_port(const Point & pos) {
 void Chamber::do_something(PlayerCharacter * player)
 {
     for (auto ch : characters) {
-        if (ch->is_hostile() || (ch->type == Character::DRAGON && is_neighbor(player, ch)))
+        if (ch->is_hostile() || (ch->get_type() == Character::DRAGON && is_neighbor(player, ch)))
             ch->set_target((Character*)player);
         else ch->set_target(nullptr);
         ch->one_turn(); // self restoring, etc.
@@ -111,12 +111,12 @@ void Chamber::player_attack(PlayerCharacter * player, const Point & dst)
             if (!ch->is_alive()) {
                 delete ch;
                 player->messages.push(
-                    Character::character_strings[ch->type] 
+                    RealCharacter::character_strings[ch->get_type()] 
                     + " was killed by PC: " 
-                    + Character::character_strings[player->type]
+                    + RealCharacter::character_strings[player->get_type()]
                     + ". \n"
                 );
-                if (player->type == Character::GOBLIN) player->gold_in_hand += 5;
+                if (player->get_type() == Character::GOBLIN) player->gold_change(+5);
                 this->push(ch->drop_reward()); // Todo: DROP REWARD;
                 auto g = new Gold(Gold::NORMAL);
                 player->use_item( g );

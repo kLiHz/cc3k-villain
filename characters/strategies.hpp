@@ -20,7 +20,7 @@ public:
     , current_health(init_status.health)
     , current_atk(init_status.atk)
     , current_def(init_status.def) {}
-
+    virtual ~DefaultStrategy() {}
     virtual Attack      attack(Character * target) {
         if (!target) return Attack(self, 0);
         int current_atk = current_status().atk;
@@ -64,6 +64,7 @@ class NoHealthLimit : public DefaultStrategy {
 public:
     NoHealthLimit(CStatus init_status, Character * ch = nullptr) 
     : DefaultStrategy( init_status, ch) {}
+    virtual ~NoHealthLimit() {}
     virtual void        apply(const Effect & effect) {
         current_health += effect.hp_change;
         current_atk += effect.atk_buff;
@@ -82,7 +83,7 @@ public:
 //        int current_atk = current_status().atk;
 //        auto atk = Attack(self, current_atk);
 //        int miss = rand() % 1;
-//        if (target->type == disturbance && miss) atk.atk_points = 0;
+//        if (target->get_type() == disturbance && miss) atk.atk_points = 0;
 //        target->receive(atk); 
 //        return atk;
 //    };
@@ -94,7 +95,7 @@ protected:
     CStrategy * pre_strategy;
 public:
     StrategyDecorator(CStrategy * s) : pre_strategy(s) {}
-    virtual ~StrategyDecorator() { delete pre_strategy; }
+    ~StrategyDecorator() { delete pre_strategy; }
 
     virtual Attack          attack(Character * target)      = 0; //{ return pre_strategy->attack(target); }
     virtual void            receive(const Attack & attack)  = 0; //{ return pre_strategy->receive(attack); }
@@ -155,7 +156,7 @@ class GoldbyAttack : public StrategyDecorator {
 public: 
     GoldbyAttack(CStrategy * s) : StrategyDecorator(s) {}
     virtual Attack attack(Character * target) {
-        pre_strategy->get_self()->gold_in_hand += 5;
+        pre_strategy->get_self()->gold_change(+5);
         return pre_strategy->attack(target);
     }
     virtual void            receive(const Attack & attack) { return pre_strategy->receive(attack); } 
@@ -183,14 +184,14 @@ public:
     Allergic(CStrategy * s, Character::CharacterType allergic_to)
     : StrategyDecorator(s), allergen(allergic_to) {}
     virtual void            receive(const Attack & atk) {
-        if (atk.attacker->type == allergen) this->apply( Effect(-5,0,0) );
+        if (atk.attacker->get_type() == allergen) this->apply( Effect(-5,0,0) );
         // Allergic, lost Health Points
         pre_strategy->receive(atk);
     }
     virtual void            apply(const Effect & effect) { pre_strategy->apply(effect); }
     virtual void            consume(Item * item) { pre_strategy->consume(item); }
     virtual Attack          attack(Character * target) {
-        if (target->type == allergen) this->apply( Effect(-5,0,0) );
+        if (target->get_type() == allergen) this->apply( Effect(-5,0,0) );
         // Allergic, lost Health Points
         return pre_strategy->attack(target);
     }
@@ -205,7 +206,7 @@ public:
     : StrategyDecorator(s), object(ch) {}
     virtual Attack          attack(Character * target) { return pre_strategy->attack(target); }
     virtual void            receive(const Attack & atk) { 
-        if (atk.attacker->type == object) pre_strategy->receive(
+        if (atk.attacker->get_type() == object) pre_strategy->receive(
             Attack( atk.attacker, atk.atk_points * 1.5 )
         ); 
         return pre_strategy->receive(atk);

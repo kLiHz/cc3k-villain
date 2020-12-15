@@ -8,18 +8,22 @@
 // Decorate Class: PlayerCharacter
 class PlayerCharacter : public Character
 {
-    Character * character;
+    Character * its_character;
 public:
     std::queue<std::string> messages;
-    PlayerCharacter(Character * ch) : Character(*ch), character(ch) {}
+    PlayerCharacter(Character * ch) : its_character(ch) {}
     ~PlayerCharacter();
     //void receive(const Item &);
     int gold_amount();
+    void gold_change(int amount );
     void use_item(Item * item);
     char get_denote() { return '@'; }
-    void do_something();
     void attack(Character * target);
-    void receive(Attack attack);
+    void receive(const Attack & attack);
+    void set_target(Character * target);
+    Character * get_target();
+    void one_turn();
+    CharacterType get_type();
     
     CStatus     default_status() ;
     CStatus     current_status() ;

@@ -4,19 +4,19 @@
 #include "./character.hpp"
 #include "./strategies.hpp"
 
-class Shade : public Character
+class Shade : public RealCharacter
 {
 public:
-    Shade() : Character(125,25,25, SHADE) {
+    Shade() : RealCharacter(125,25,25, SHADE) {
         strategy = new DefaultStrategy(this->default_status(), this);
     }
     char get_denote() { return 'S'; }
 };
 
-class Drow : public Character
+class Drow : public RealCharacter
 {
 public:
-    Drow() : Character(150, 25, 15, DROW) {
+    Drow() : RealCharacter(150, 25, 15, DROW) {
         auto s = new DefaultStrategy(this->default_status(), this);
         strategy = new PotionEnhance(s, 1.5);
     }
@@ -30,10 +30,10 @@ public:
     }
 };
 
-class Vampire : public Character
+class Vampire : public RealCharacter
 {
 public:
-    Vampire() : Character(50, 25, 25, VAMPIRE) {
+    Vampire() : RealCharacter(50, 25, 25, VAMPIRE) {
         CharacterStrategy * s = new NoHealthLimit(this->default_status(), this);
         s = new Allergic(s, DROW);
         strategy = new RestoreHPbyAttak(s);
@@ -49,21 +49,21 @@ public:
     }
 };
 
-class Troll : public Character
+class Troll : public RealCharacter
 {
 public:
-    Troll() : Character(120, 25, 15, TROLL) {
+    Troll() : RealCharacter(120, 25, 15, TROLL) {
         auto s = new DefaultStrategy(this->default_status(), this);
     }
     char get_denote() { return 'T'; }
 };
 
-class Goblin : public Character
+class Goblin : public RealCharacter
 {
 public:
-    Goblin() : Character(110, 15, 20, GOBLIN) {
+    Goblin() : RealCharacter(110, 15, 20, GOBLIN) {
         strategy = new DefaultStrategy(this->default_status(), this);
-        strategy = new PronetoHurt(strategy, Character::ORCS);
+        strategy = new PronetoHurt(strategy, RealCharacter::ORCS);
     }
     char get_denote() { return 'L'; }
     void debuff() {
@@ -71,38 +71,38 @@ public:
         _status.health = this->current_status().health;
         delete strategy;
         strategy = new DefaultStrategy(_status, this);
-        strategy = new PronetoHurt(strategy, Character::ORCS);
+        strategy = new PronetoHurt(strategy, RealCharacter::ORCS);
     }
 };
 
-class Dwarf : public Character
+class Dwarf : public RealCharacter
 {
 public:
-    Dwarf() : Character(100, 20, 30, DWARF) {
+    Dwarf() : RealCharacter(100, 20, 30, DWARF) {
         attitude = HOSTILE;
         strategy = new DefaultStrategy(this->default_status(), this);
     }
     char get_denote() { return 'W'; }
 };
 
-class Elf : public Character
+class Elf : public RealCharacter
 {
 public:
-    Elf() : Character(140, 30, 10, ELF) {
+    Elf() : RealCharacter(140, 30, 10, ELF) {
         attitude = HOSTILE;
         strategy = new DefaultStrategy(this->default_status(), this);
     }
     void attack(Character * p) {
-        if (p->type != DROW) strategy->attack(p);
+        if (p->get_type() != DROW) strategy->attack(p);
         strategy->attack(p);
     } 
     char get_denote() { return 'E'; }
 };
 
-class Orc : public Character
+class Orc : public RealCharacter
 {
 public:
-    Orc() : Character(180, 30, 25, ORCS) {
+    Orc() : RealCharacter(180, 30, 25, ORCS) {
         attitude = HOSTILE; 
         strategy = new DefaultStrategy(this->default_status(), this);
         
@@ -110,20 +110,20 @@ public:
     char get_denote() { return 'O'; }
 };
 
-class Halfling : public Character
+class Halfling : public RealCharacter
 {
 public:
-    Halfling() : Character(100, 15, 20, HALFLING) {
+    Halfling() : RealCharacter(100, 15, 20, HALFLING) {
         attitude = HOSTILE;
         strategy = new DefaultStrategy(this->default_status(), this);
     }
     char get_denote() { return 'L'; }
 };
 
-class Human : public Character 
+class Human : public RealCharacter 
 {
 public:
-    Human() : Character(140, 20, 20, HUMAN) {
+    Human() : RealCharacter(140, 20, 20, HUMAN) {
         attitude = HOSTILE;
         strategy = new DefaultStrategy(this->default_status(), this);
     }
@@ -134,10 +134,10 @@ public:
     Item * drop_reward();
 };
 
-class Merchant : public Character
+class Merchant : public RealCharacter
 {
 public:
-    Merchant() : Character(30, 70, 5, MERCHANT) {
+    Merchant() : RealCharacter(30, 70, 5, MERCHANT) {
         attitude = NEUTRAL;
         strategy = new DefaultStrategy(this->default_status(), this);
     }
@@ -152,12 +152,12 @@ public:
     } 
 };
 
-class Dragon : public Character
+class Dragon : public RealCharacter
 {
 private:
 public:
     Point hoard_position;
-    Dragon( Point _hoard ) : Character(150, 20, 20, DRAGON), hoard_position(_hoard) {
+    Dragon( Point _hoard ) : RealCharacter(150, 20, 20, DRAGON), hoard_position(_hoard) {
         strategy = new DefaultStrategy(this->default_status(), this);
         strategy = new StayStill(strategy);
     }
