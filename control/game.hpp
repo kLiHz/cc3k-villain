@@ -53,9 +53,9 @@ public:
             }
         }
         initialize();
-        display->draw(floor);
-        display->show(player);
         while (playing) {
+            display->draw(floor);
+            display->show(player);
             while(!usr_command());
             if (floor->at_stair()) {
                 ++floor_num;
@@ -67,10 +67,7 @@ public:
                 }
                 generate_floor();
             }
-            //floor->budge();
-            floor->do_something();
-            display->draw(floor);
-            display->show(player);
+            floor->do_something(); // floor->budge();
             if (!player->is_alive()) lose_game();
         }
         goodbye(); 
@@ -78,6 +75,7 @@ public:
     //void load_ranks();
     void lose_game() {
         bool play_again = true;
+        std::cout << "You lost the game!" << std::endl;
         // Todo: Would you like to try again?
         if (play_again) { // Yes
             view_ranks();
@@ -92,10 +90,10 @@ public:
         }
         playing = false;
     }
-    void view_ranks() {
-    }
+    void view_ranks();
     void goodbye() {
         view_ranks();
+        std::cout << "Thanks for playing the game!" << std::endl;
         // GOODBYE PAGE: THANKS FOR PLAYING!
     }
     void restart() {

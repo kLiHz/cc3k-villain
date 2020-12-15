@@ -17,6 +17,10 @@ void Game::generate_floor() {
     // else throw exception
 }
 
+void Game::view_ranks() {
+    std::cout << "You've gained " << player->gold_amount() << " pieces of gold. " << std::endl;
+}
+
 bool Game::generate_player() {
     std::cout << "Choose a race to begin (s, d, v, t, g): " << std::endl;
     // Todo: race introduction;
