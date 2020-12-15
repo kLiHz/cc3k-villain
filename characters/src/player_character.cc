@@ -25,30 +25,31 @@ void PlayerCharacter::use_item(Item * item) {
 
 void PlayerCharacter::attack(Character * target) {
     auto prestatus = target->current_status();
-    bool miss = false;
-    if (target->get_type() == Character::HALFLING && rand() % 1) miss = true;
-    if (!miss) its_character->attack(target);
-    auto afterstatus = target->current_status();
-    // Character has 100% hit accuracy. 
     messages.push(
-        std::string("Player (")
-        + std::to_string(this->current_status().health) + " HP)"
-        + " hit the " + RealCharacter::character_strings[target->get_type()] + ". "
+        std::string("Player hit the ")
+        + RealCharacter::character_strings[target->get_type()] 
+        + " (" + std::to_string(target->current_status().health) + " HP). "
     );
-    messages.push(
-        RealCharacter::character_strings[target->get_type()]
-        + " lost " + std::to_string(prestatus.health - afterstatus.health) + " HP. \n"
-    );
+    bool miss = false; // Character has 100% hit accuracy, 
+    if (target->get_type() == Character::HALFLING && rand() % 2) miss = true; // but only a half when attacking halflings
+    if (!miss) {
+        its_character->get_strategy()->attack(target);
+        auto afterstatus = target->current_status();
+        messages.push(
+            RealCharacter::character_strings[target->get_type()]
+            + " lost " + std::to_string(prestatus.health - afterstatus.health) + " HP. \n"
+        );
+    }
+    else {
+        messages.push(
+            std::string("Player missed the ")
+            + RealCharacter::character_strings[target->get_type()] + ". \n"
+        );
+    }
 }
 
 void PlayerCharacter::receive(const Attack & attack) {
     auto prestatus = its_character->current_status();
-    messages.push(
-        "The " + RealCharacter::character_strings[attack.attacker->get_type()] 
-        + '(' + std::to_string(attack.attacker->current_status().health) + " HP)"
-        + " hit the Player. " 
-    );
-    //its_character->receive(attack);
     if (attack.atk_points < 0)
     {
         messages.push(
@@ -58,13 +59,13 @@ void PlayerCharacter::receive(const Attack & attack) {
         );
         its_character->receive(attack);
         auto afterstatus = its_character->current_status();
-        messages.push( "Player lost " + std::to_string(prestatus.health - afterstatus.health) + "HP. " );
+        messages.push( "Player lost " + std::to_string(prestatus.health - afterstatus.health) + "HP. \n" );
     }
     else {
         messages.push(
             "The " + RealCharacter::character_strings[attack.attacker->get_type()] 
             + '(' + std::to_string(attack.attacker->current_status().health) + " HP)"
-            + " missed the Player. " 
+            + " missed the Player. \n" 
         );
     }
 }

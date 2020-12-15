@@ -25,15 +25,12 @@ public:
         if (!target) return Attack(self, 0);
         int current_atk = current_status().atk;
         auto atk = Attack(self, current_atk);
-        // All characters has a possibility to miss its target.
-        int miss = rand() % 1;
-        if (miss) atk.atk_points = 0;
         target->receive(atk); 
         return atk;
     };
     virtual void        receive(const Attack & attack) {
         int current_def = current_status().def;
-        current_health -= attack.atk_points * ( 100 / (100 + current_def));
+        current_health -= attack.atk_points * ( (double)100 / (100 + current_def));
     };
     virtual void        consume(Item * item) {
         if (item->type == Item::POTION) this->apply(item->get_effect());

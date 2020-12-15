@@ -29,7 +29,10 @@ RealCharacter::gold_change( int amount ) {
 
 void 
 RealCharacter::attack(Character * target) {
-    strategy->attack(target);
+    // All characters has a possibility to miss its target.
+    int miss = rand() % 2;
+    if (!miss) strategy->attack(target);
+    else target->receive(Attack(this, 0));
 }
 
 void 

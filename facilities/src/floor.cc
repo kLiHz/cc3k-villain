@@ -120,7 +120,7 @@ void Floor::initialize() {
             t_gold = new Gold(Gold::GoldType::SMALL);
             while (!chambers[rand() % chambers.size()]->push(t_gold));
             break;
-        case 8:
+        case 7:
             while (!dragon_spawn || !hoard_spawn) {
                 while (!dragon_spawn) {
                     room_num = rand() % chambers.size();

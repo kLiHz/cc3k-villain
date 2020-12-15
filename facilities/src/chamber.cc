@@ -41,7 +41,7 @@ Port * Chamber::at_port(const Point & pos) {
 void Chamber::do_something(PlayerCharacter * player)
 {
     for (auto ch : characters) {
-        if (ch->is_hostile() || (ch->get_type() == Character::DRAGON && is_neighbor(player, ch)))
+        if (ch->is_hostile() && is_neighbor(player, ch) || (ch->get_type() == Character::DRAGON && is_neighbor(player, ch)))
             ch->set_target((Character*)player);
         else ch->set_target(nullptr);
         ch->one_turn(); // self restoring, etc.
@@ -65,51 +65,30 @@ void Chamber::player_go(PlayerCharacter * player, const Point & dst)
         // Todo: unable to move; blocked
         return;
     }
-    auto i = characters.begin();
-    for (auto ch : characters) {
-        if (dst == ch->get_position()) {
-            blocked = true;
-            if (ch->is_hostile()) player->attack(ch);
-            if (!ch->is_alive()) {
-                delete ch;
-                // ToDO: DROP GOLD;
-                characters.erase(i); 
-                // Attention: there is something to take care of when using 'std::list<T>::erase()'
-            }
-            else {} // Todo: unable to move
-            break;
-        }
-        ++i;
-    }
-    auto j = items.begin();
-    for (auto item : items) {
-        if (dst == item->get_pos()) {
-            if (item->type == Item::GOLD) {
-                blocked = false;
-                player->use_item(item);
-                items.erase(j);
-            }
-            else {
-                blocked = true;
-                // or the character can pick up it;
-                // implement in the future when inventory system finished
-                // Todo: print potion info.
-            }
-            break;
-        }
-        ++j;
-    }
+    player_try_attack(player, dst, false);
+    //blocked = !is_available(dst);
+    //if (blocked) return; // round ended;
+    player_try_use(player, dst, false);
+    blocked = !is_available(dst);
     if (!blocked) player->move_to(dst);
 }
 
-void Chamber::player_attack(PlayerCharacter * player, const Point & dst)
+void Chamber::player_attack(PlayerCharacter * player, const Point & dst) {
+    player_try_attack(player, dst, true); // intended
+}
+
+void Chamber::player_use(PlayerCharacter * player, const Point & dst) {
+    player_try_use(player, dst, true); // intended
+}
+
+void Chamber::player_try_attack(PlayerCharacter * player, const Point & dst, bool intended)
 {
     auto i = characters.begin();
     for (auto ch : characters) {
         if (dst == ch->get_position()) {
-            player->attack(ch);
+            if (intended) player->attack(ch);
+            else if (ch->is_hostile()) player->attack(ch);
             if (!ch->is_alive()) {
-                delete ch;
                 player->messages.push(
                     RealCharacter::character_strings[ch->get_type()] 
                     + " was killed by PC: " 
@@ -122,26 +101,44 @@ void Chamber::player_attack(PlayerCharacter * player, const Point & dst)
                 player->use_item( g );
                 delete g;
                 // The gold is immediately picked up by Player.
+                delete ch;
                 characters.erase(i);
+                // Attention: there is something to take care of when using 'std::list<T>::erase()'
             }
+            else {} // Todo: unable to move
             break; // attack finished, return.
         }
         ++i;
     }
+    // attack nothing
 }
 
-void Chamber::player_use(PlayerCharacter * player, const Point & dst) {
+void Chamber::player_try_use(PlayerCharacter * player, const Point & dst, bool intended) {
+    bool got_item = false;
     auto i = items.begin();
     for (auto item : items) {
         if (dst == item->get_pos()) {
-            player->use_item(item); // player use potion;
-            items.erase(i);
+            got_item = true;
+            if (item->type == Item::GOLD) {
+                // walks across gold, automatically pick it up
+                player->use_item(item);
+                delete item;
+                items.erase(i);
+            }
+            else if (intended) {
+                player->use_item(item); // player use potion;
+                delete item;
+                items.erase(i);
+                // or the character can pick up it;
+                // implement in the future when inventory system finished
+                // Todo: print potion info.
+            }
             break;
         }
         ++i;
     }
     // todo: there's nothing to use in the direction
-    player->messages.push("There's nothing to use in this direction. \n");
+    if (intended && !got_item) player->messages.push("There's nothing to use in this direction. \n");
     // there's nothing to use
 }
 

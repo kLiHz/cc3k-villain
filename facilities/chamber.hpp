@@ -17,6 +17,8 @@ class Chamber
     std::list<Character*>   characters; // stores chracters in the room other than Player Character
     std::list<Item*>        items; // items are managed by chamber
     std::list<Port*>        ports; // ports are managed by chamber
+    void player_try_attack(PlayerCharacter * player, const Point & dst, bool intended = false);
+    void player_try_use(PlayerCharacter * player, const Point & dst, bool intended = false);
 public:
     friend class Display;
     Chamber(Rect _region, const std::list<Port*> & _ports);
