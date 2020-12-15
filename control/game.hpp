@@ -17,12 +17,13 @@ class Game
     Floor *     floor     = nullptr;
     PC *        player    = nullptr;
     int         floor_num = 1;
+    int         floor_max_num = 5;
     bool        playing   = false;
     bool        color_output = false;
     void        welcome();
     void        show_help();
     void        usr_command();
-    void        generate_player();
+    bool        generate_player();
     void        generate_floor();
 public:
     Game( std::string _seed = "" ) : seed(_seed) {}
@@ -30,7 +31,8 @@ public:
         // WELCOME PAGE
         welcome();
         // CHOOSE PLAYER
-        generate_player();
+        if (player) { delete player; player = nullptr; }
+        while (!generate_player());
         // GENERATE FLOOR
         generate_floor();
         if (display) delete display;
@@ -57,6 +59,12 @@ public:
             usr_command();
             if (floor->at_stair()) {
                 ++floor_num;
+                if (floor_num > floor_max_num) {
+                    std::cout << "You've reached the top! Congratulations!" << std::endl;
+                }
+                else {
+                    std::cout << "You've entered Floor " << floor_num << "! " << std::endl;
+                }
                 generate_floor();
             }
             //floor->budge();

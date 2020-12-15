@@ -17,15 +17,14 @@ void Game::generate_floor() {
     // else throw exception
 }
 
-void Game::generate_player() {
-    if (player) delete player;
+bool Game::generate_player() {
     std::cout << "Choose a race to begin: " << std::endl;
     // Todo: race introduction;
     std::string usr_input;
     std::cin >> usr_input; // get user choice;
     auto i = usr_input.begin();
     while ( i != usr_input.end() && (*i == ' ' || *i == '\t') ) ++i;
-    Character * t_ch;
+    Character * t_ch = nullptr;
     switch ( *i ) {
     case 's': case 'S': t_ch = new Shade() ; break; // Shade
     case 'd': case 'D': t_ch = new Drow() ; break; // Drow
@@ -34,10 +33,11 @@ void Game::generate_player() {
     case 'g': case 'G': t_ch = new Goblin() ; break; // Goblin
     default:
         std::cout << "Wrong choice. Please Try again.\n";
-        return generate_player();
+        return false;
         break;
     }
     player = new PlayerCharacter( t_ch );
+    return true;
 }
 
 void Game::usr_command() {

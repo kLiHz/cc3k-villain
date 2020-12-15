@@ -8,7 +8,7 @@
 // Decorate Class: PlayerCharacter
 class PlayerCharacter : public Character
 {
-    Character * its_character;
+    Character * its_character = nullptr;
 public:
     std::queue<std::string> messages;
     PlayerCharacter(Character * ch) : its_character(ch) {}
