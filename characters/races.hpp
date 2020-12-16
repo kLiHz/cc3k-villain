@@ -53,7 +53,7 @@ class Troll : public RealCharacter
 {
 public:
     Troll() : RealCharacter(120, 25, 15, TROLL) {
-        auto s = new DefaultStrategy(this->default_status(), this);
+        strategy = new DefaultStrategy(this->default_status(), this);
     }
     char get_denote() { return 'T'; }
 };
