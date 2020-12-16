@@ -10,8 +10,8 @@ public:
     int y; // y indicates which row (vertical position)
     Point() : x(0), y(0) {}
     Point(int _x, int _y) : x(_x), y(_y) {}
-    Point operator+(const Point & p);
-    Point operator-(const Point & p);
+    Point operator+(const Point & p) const;
+    Point operator-(const Point & p) const;
     Point& operator+=(const Point & p);
     Point& operator-=(const Point & p);
     //bool operator<(const Point & p) const;
@@ -27,10 +27,10 @@ public:
     Rect(const Point& a, const Point& b);
     Rect(const Point& _tl, int _height, int _width);
     //Rect operator = (const Rect &);
-    Point tl();
-    Point br();
-    bool contains(const Point & p);
-    int area();
+    Point tl() const;
+    Point br() const;
+    bool contains(const Point & p) const;
+    int area() const;
 };
 
 class Line {
@@ -39,8 +39,9 @@ public:
     Point end;
     Line();
     Line(const Point& a, const Point& b) : begin(a), end(b) {}
-    bool cross(const Point& p);
-    bool contains(const Point& p);
+    bool cross(const Point& p) const;
+    bool contains(const Point& p) const;
+    Rect bounding_rect() const;
 };
 
 #endif

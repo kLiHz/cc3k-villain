@@ -61,11 +61,12 @@ public:
                 ++floor_num;
                 if (floor_num > floor_max_num) {
                     std::cout << "You've reached the top! Congratulations!" << std::endl;
+                    playing = false;
                 }
                 else {
                     std::cout << "You've entered Floor " << floor_num << "! " << std::endl;
+                    generate_floor();
                 }
-                generate_floor();
             }
             floor->do_something(); // floor->budge();
             if (!player->is_alive()) lose_game();
