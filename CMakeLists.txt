@@ -11,7 +11,6 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/control 
     ${PROJECT_SOURCE_DIR}/facilities 
     ${PROJECT_SOURCE_DIR}/items 
-    ${PROJECT_SOURCE_DIR}/tools
 )
 add_executable(
     cc3k
@@ -28,5 +27,4 @@ add_executable(
     ./basic/src/figures.cc
     ./items/src/gold.cc
     ./items/src/potion.cc
-    ./tools/src/output_txt.cpp
 )
