@@ -91,3 +91,4 @@ bool        PlayerCharacter::is_hostile() { return its_character->is_hostile();}
 void        PlayerCharacter::move_to(const Point & dst) { its_character->move_to(dst);}
 void        PlayerCharacter::use_potion(Item * item){ its_character->use_potion(item);}
 Item *      PlayerCharacter::drop_reward() { return its_character->drop_reward();}
+void        PlayerCharacter::debuff() { return its_character->debuff(); }
