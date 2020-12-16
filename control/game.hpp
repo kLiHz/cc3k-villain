@@ -55,7 +55,7 @@ public:
         initialize();
         while (playing) {
             display->draw(floor);
-            display->show(player);
+            display->show(player, floor_num);
             while(!usr_command());
             if (floor->at_stair()) {
                 ++floor_num;

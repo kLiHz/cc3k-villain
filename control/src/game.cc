@@ -14,7 +14,7 @@ void Game::show_help()
 void Game::generate_floor() {
     if (floor) { delete floor; floor = nullptr; }
     player->debuff();
-    if (player) floor = new Floor(player);
+    if (player) floor = new Floor(player, floor_num);
     // else throw exception
 }
 
