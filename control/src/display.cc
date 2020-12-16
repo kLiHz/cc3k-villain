@@ -1,11 +1,12 @@
 #include "../display.hpp"
 
-void Display::show(PlayerCharacter * player) {
+void Display::show(PlayerCharacter * player, int floor_num) {
     // Show Screen
     screen->display();
     // Show Player Character's Status
     std::cout << "Race: " << RealCharacter::character_strings[player->get_type()];
-    std::cout << "\tGold: " << player->gold_amount() << '\n';
+    std::cout << "\tGold: " << player->gold_amount() << "\t\t\t\t\t\tFloor " << floor_num;
+    std::cout << '\n';
     auto status = player->current_status();
     std::cout << "HP: " << status.health << '\n';
     std::cout << "Atk: " << status.atk << '\n';
@@ -22,6 +23,8 @@ void Display::show(PlayerCharacter * player) {
         std::cout << msg_quque.front();
         msg_quque.pop();
     }
+    std::cout << std::endl;
+    std::cout << "> ";
 }
 
 void Display::draw(Floor * _floor) {

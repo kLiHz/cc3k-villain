@@ -2,19 +2,28 @@
 
 void Game::welcome() {
     std::cout << "Welcome to play the game of Chamber Crawler 3000 - villain!" << std::endl;
+    show_help();
 }
 
 void Game::show_help()
 {
+    std::cout << std::endl;
     std::cout << "Help: \n";
-    std::cout << "    <directions>: n(o) s(o) e(a) w(e) ne nw se sw \n";
-    std::cout << "    a <direction>: attack given direction\n";
+    std::cout << "  h               : show help\n";
+    std::cout << "  <direction>     : e.g. n(o) s(o) e(a) w(e) ne nw se sw \n\n";
+    std::cout << "    - giving a direction instructs the PC to roam towards it, and they would\n";
+    std::cout << "      automatically attack anyone hostile in their way or pick up any gold.\n\n";
+    std::cout << "  a <direction>   : attack given direction\n";
+    std::cout << "  u <direction>   : use sth. at given direction\n";
+    std::cout << "  q               : quit the game\n";
+    std::cout << "  r               : restart the game\n";
+    std::cout << std::endl;
 }
 
 void Game::generate_floor() {
     if (floor) { delete floor; floor = nullptr; }
     player->debuff();
-    if (player) floor = new Floor(player);
+    if (player) floor = new Floor(player, floor_num);
     // else throw exception
 }
 
@@ -36,11 +45,13 @@ bool Game::generate_player() {
     case 'v': case 'V': t_ch = new Vampire() ; break; // Vampire
     case 't': case 'T': t_ch = new Troll() ; break; // Troll
     case 'g': case 'G': t_ch = new Goblin() ; break; // Goblin
+    case 'q': case 'Q': playing = false; return true; break;
     default:
         std::cout << "Wrong choice. Please Try again.\n";
         return false;
         break;
     }
+    playing = true;
     player = new PlayerCharacter( t_ch );
     return true;
 }

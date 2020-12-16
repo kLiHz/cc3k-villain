@@ -22,7 +22,7 @@ public:
     };
     ~Display() { delete screen; }
     //void draw();
-    void show(PlayerCharacter * player);
+    void show(PlayerCharacter * player, int floor_num);
     void draw(Floor * _floor);
     void draw(Chamber * _chamber);
     void draw(Character * _character);

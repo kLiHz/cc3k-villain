@@ -10,7 +10,7 @@ class Floor
 {
 public:
     friend class Display;
-    Floor(PlayerCharacter * _player) : player(_player) {
+    Floor(PlayerCharacter * _player, int _num = 1) : player(_player), floor_num(_num) {
         initialize();
     }
     ~Floor() {
@@ -29,6 +29,7 @@ public:
     void player_attack(const Point & dst);
     void player_use(const Point & dst);
     bool at_stair();
+    int  get_num() { return floor_num; } 
 private:
     PlayerCharacter *       player      = nullptr;
     std::vector<Chamber *>  chambers;   // managed by 'floor'
@@ -37,7 +38,8 @@ private:
     Path *                  the_path    = nullptr;       
     Port *                  the_port    = nullptr;       
     Port *                  stairs;     // managed by 'floor'
-    bool                    is_frozen = false;
+    bool                    is_frozen   = false;
+    int                     floor_num   = 1;
     enum Where {CHAMBER, PORT, PATH};
     Where player_where = Where::CHAMBER;
 };

@@ -33,6 +33,7 @@ public:
         // CHOOSE PLAYER
         if (player) { delete player; player = nullptr; }
         while (!generate_player());
+        if (playing == false) return;
         // GENERATE FLOOR
         generate_floor();
         if (display) delete display;
@@ -55,7 +56,7 @@ public:
         initialize();
         while (playing) {
             display->draw(floor);
-            display->show(player);
+            display->show(player, floor_num);
             while(!usr_command());
             if (floor->at_stair()) {
                 ++floor_num;
@@ -93,7 +94,7 @@ public:
     }
     void view_ranks();
     void goodbye() {
-        view_ranks();
+        if (player) view_ranks();
         std::cout << "Thanks for playing the game!" << std::endl;
         // GOODBYE PAGE: THANKS FOR PLAYING!
     }
