@@ -42,6 +42,7 @@ public:
     virtual int         gold_amount() = 0;
     virtual void        gold_change(int amount) = 0;
     virtual CharacterStrategy*  get_strategy() = 0;
+    virtual void        debuff() = 0;
 };
 
 struct Attack
