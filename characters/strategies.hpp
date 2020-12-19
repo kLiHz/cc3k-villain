@@ -14,6 +14,7 @@ protected:
     int current_health;
     int current_atk;
     int current_def;
+    bool is_attacking = false;
 public:
     DefaultStrategy(CStatus init_status, Character * ch = nullptr) 
     : self(ch) 
@@ -22,10 +23,11 @@ public:
     , current_def(init_status.def) {}
     virtual ~DefaultStrategy() {}
     virtual Attack      attack(Character * target) {
-        if (!target) return Attack(self, 0);
+        if (target == nullptr) return Attack(self, 0);
         int current_atk = current_status().atk;
         auto atk = Attack(self, current_atk);
         target->receive(atk); 
+        is_attacking = true;
         return atk;
     };
     virtual void        receive(const Attack & attack) {
@@ -50,6 +52,10 @@ public:
         return CStatus(current_health, current_atk, current_def); 
     };
     virtual Point       get_move_offset() { 
+        if (is_attacking) { 
+            is_attacking = false;
+            return Point(0,0);
+        }
         return Point(rand() % 3 - 1, rand() % 3 - 1); // random move; may chase its target (e.g. Player) in the future
     }; 
     virtual Character * get_target()              { return target; }

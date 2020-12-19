@@ -50,7 +50,7 @@ void PlayerCharacter::attack(Character * target) {
 
 void PlayerCharacter::receive(const Attack & attack) {
     auto prestatus = its_character->current_status();
-    if (attack.atk_points < 0)
+    if (attack.atk_points > 0)
     {
         messages.push(
             "The " + RealCharacter::character_strings[attack.attacker->get_type()] 

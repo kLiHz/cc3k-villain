@@ -54,8 +54,8 @@ bool        RealCharacter::is_hostile() { return attitude == HOSTILE; }
 void        RealCharacter::move_to(const Point & dst) { position = dst; }
 void        RealCharacter::use_potion(Item * item) { strategy->consume(item); } 
 void        RealCharacter::one_turn() {
-    Character * aim = strategy->get_target();
-    if (aim != nullptr) strategy->attack(aim);
+    Character * aim = this->get_target();
+    if (aim != nullptr) this->attack(aim);
 };
 Character *  RealCharacter::get_target() { return strategy->get_target(); }
 void         RealCharacter::set_target(Character * ch) { strategy->set_target(ch); }
