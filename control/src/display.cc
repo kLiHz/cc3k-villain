@@ -1,6 +1,8 @@
 #include "../display.hpp"
 
 void Display::show(PlayerCharacter * player, int floor_num) {
+    //std::cout << "\ec"; // clear terminal
+    std::cout << "\e[H\e[2J"; // move cursor to the upper left
     // Show Screen
     screen->display();
     // Show Player Character's Status
@@ -14,17 +16,15 @@ void Display::show(PlayerCharacter * player, int floor_num) {
     // Show Messages per Round
     std::queue<std::string> & msg_quque  = player->messages;
     std::cout << "Action: ";
-    //while (!msg_quque.empty()) {
-    //    std::cout << msg_quque.front()->get_string() << std::endl;
-    //    delete msg_quque.front();
-    //    msg_quque.pop();
-    //}
+    int msg_cnt = 0;
     while (!msg_quque.empty()) {
+        if (msg_cnt > 0 && *(msg_quque.front().rbegin()) != '\n') std::cout << '\t';
         std::cout << msg_quque.front();
+        if (*(msg_quque.front().rbegin()) == '\n') ++msg_cnt;
         msg_quque.pop();
     }
-    std::cout << std::endl;
-    std::cout << "> ";
+    if (msg_cnt == 0) std::cout << '\n';
+    if (player->is_alive()) std::cout << "> ";
 }
 
 void Display::draw(Floor * _floor) {

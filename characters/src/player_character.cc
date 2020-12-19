@@ -50,6 +50,7 @@ void PlayerCharacter::attack(Character * target) {
 
 void PlayerCharacter::receive(const Attack & attack) {
     auto prestatus = its_character->current_status();
+    if (!(its_character->is_alive())) return; // no longer able to receive attak
     if (attack.atk_points > 0)
     {
         messages.push(
@@ -60,6 +61,11 @@ void PlayerCharacter::receive(const Attack & attack) {
         its_character->receive(attack);
         auto afterstatus = its_character->current_status();
         messages.push( "Player lost " + std::to_string(prestatus.health - afterstatus.health) + "HP. \n" );
+        if (!(its_character->is_alive())) messages.push(
+            "Player was killed by " 
+            + RealCharacter::character_strings[attack.attacker->get_type()]
+            + ". \n"
+        ); // dying message
     }
     else {
         messages.push(

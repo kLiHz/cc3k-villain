@@ -58,6 +58,7 @@ public:
             display->draw(floor);
             display->show(player, floor_num);
             while(!usr_command());
+            if (!playing) break;
             if (floor->at_stair()) {
                 ++floor_num;
                 if (floor_num > floor_max_num) {
@@ -76,9 +77,25 @@ public:
     }
     //void load_ranks();
     void lose_game() {
+        display->draw(floor);
+        display->show(player, floor_num);
         bool play_again = true;
         std::cout << "You lost the game!" << std::endl;
         // Todo: Would you like to try again?
+        std::cout << "Would you like to try again? (Y/N) " << std::endl;
+        char choice = ' ';
+        while (choice == ' ') {
+            choice = getchar();
+            getchar(); // take '\n' away
+            switch (choice)
+            {
+            case 'y': case 'Y': play_again = true; break;
+            case 'n': case 'N': play_again = false; break;
+            default: 
+                std::cout << "Wrong choice. Try again." << std::endl;
+                choice = ' '; break;
+            }
+        }
         if (play_again) { // Yes
             view_ranks();
             initialize(); 
