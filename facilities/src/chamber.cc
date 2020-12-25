@@ -25,7 +25,7 @@ bool Chamber::is_neighbor(Character * a, Character * b) {
 }
 
 bool Chamber::is_available(const Point & pos) {
-    if (inside.contains(pos) == false) return false; // Walls encountered
+    if (!(inside.contains(pos))) return false; // Walls encountered
     for (auto ch : characters) if (ch->get_position() == pos) return false;
     for (auto it : items) if (it->get_pos() == pos) return false;
     return true;
@@ -81,8 +81,7 @@ void Chamber::player_try_attack(PlayerCharacter * player, const Point & dst, boo
     auto i = characters.begin();
     for (auto ch : characters) {
         if (dst == ch->get_position()) {
-            if (intended) player->attack(ch);
-            else if (ch->is_hostile()) player->attack(ch);
+            if (ch->is_hostile() || intended) player->attack(ch);
             if (!ch->is_alive()) {
                 player->messages.push(
                     RealCharacter::character_strings[ch->get_type()] 
@@ -138,7 +137,7 @@ void Chamber::player_try_use(PlayerCharacter * player, const Point & dst, bool i
 }
 
 Point Chamber::get_available_random_pos() {
-    if ( ports.size() + characters.size() + items.size() > inside.area() ) return Point(-1,-1);
+    if ( characters.size() + items.size() > inside.area() ) return Point(-1,-1);
     // todo: throw exception
     while (true) {
         int x_bias = rand() % inside.width;

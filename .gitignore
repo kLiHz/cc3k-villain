@@ -4,6 +4,9 @@ build
 build-vcxx
 [Dd]ebug
 [Rr]lease
+.idea
+cmake-build-debug
+cmake-build-release
 
 *.o
 *.obj

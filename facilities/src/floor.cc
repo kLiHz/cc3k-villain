@@ -135,7 +135,9 @@ void Floor::initialize() {
                         if (chambers[room_num]->is_available(hoard_pos)) {
                             hoard_spawn = true;
                             t_ch = new Dragon( hoard_pos );
+                            chambers[room_num]->push(t_ch);
                             t_ch->move_to(dragon_pos);
+                            chambers[room_num]->push(new Gold(Gold::DRAGON_HOARD), hoard_pos);
                             break;
                         }
                     }

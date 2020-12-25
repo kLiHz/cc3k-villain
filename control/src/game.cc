@@ -10,7 +10,7 @@ void Game::show_help()
     std::cout << std::endl;
     std::cout << "Help: \n";
     std::cout << "  h               : show help\n";
-    std::cout << "  <direction>     : e.g. n(o) s(o) e(a) w(e) ne nw se sw \n\n";
+    std::cout << "  <direction>     : e.g. n(o) s(o) e(a) w(e) ne nw se sw \n";
     std::cout << "    - giving a direction instructs the PC to roam towards it, and they would\n";
     std::cout << "      automatically attack anyone hostile in their way or pick up any gold.\n\n";
     std::cout << "  a <direction>   : attack given direction\n";

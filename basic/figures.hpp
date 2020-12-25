@@ -37,7 +37,6 @@ class Line {
 public:
     Point begin;
     Point end;
-    Line();
     Line(const Point& a, const Point& b) : begin(a), end(b) {}
     bool cross(const Point& p) const;
     bool contains(const Point& p) const;

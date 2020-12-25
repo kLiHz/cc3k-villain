@@ -20,8 +20,8 @@ class Game
     int         floor_max_num = 5;
     bool        playing   = false;
     bool        color_output = false;
-    void        welcome();
-    void        show_help();
+    static void        welcome();
+    static void        show_help();
     bool        usr_command();
     bool        generate_player();
     void        generate_floor();
