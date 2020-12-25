@@ -60,7 +60,7 @@ void PlayerCharacter::receive(const Attack & attack) {
         );
         its_character->receive(attack);
         auto afterstatus = its_character->current_status();
-        messages.push( "Player lost " + std::to_string(prestatus.health - afterstatus.health) + "HP. \n" );
+        messages.push( "Player lost " + std::to_string(prestatus.health - afterstatus.health) + " HP. \n" );
         if (!(its_character->is_alive())) messages.push(
             "Player was killed by " 
             + RealCharacter::character_strings[attack.attacker->get_type()]
@@ -82,9 +82,15 @@ void PlayerCharacter::set_target(Character * target) { return its_character->set
 Character * PlayerCharacter::get_target() { return its_character->get_target(); }
 Character::CharacterType PlayerCharacter::get_type() { return its_character->get_type(); }
 
-void PlayerCharacter::one_turn(){
+void PlayerCharacter::one_turn() {
+    static int turns = 0;
+    ++turns;
     if (its_character->get_type() == Character::TROLL) 
-    its_character->get_strategy()->apply(Effect(5,0,0));
+        its_character->get_strategy()->apply(Effect(5,0,0));
+    if (turns % 5 == 0) {
+        its_character->get_strategy()->apply(Effect(3,0,0));
+        turns = 0;
+    }
 }
 
 //void        PlayerCharacter::debuff() { its_character->debuff();}

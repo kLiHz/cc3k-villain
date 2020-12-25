@@ -81,6 +81,7 @@ public:
         display->show(player, floor_num);
         bool play_again = true;
         std::cout << "You lost the game!" << std::endl;
+        view_ranks();
         // Todo: Would you like to try again?
         std::cout << "Would you like to try again? (Y/N) " << std::endl;
         char choice = ' ';
@@ -97,7 +98,6 @@ public:
             }
         }
         if (play_again) { // Yes
-            view_ranks();
             initialize(); 
         } else {
             playing = false;

@@ -27,7 +27,6 @@ public:
         int current_atk = current_status().atk;
         auto atk = Attack(self, current_atk);
         target->receive(atk); 
-        is_attacking = true;
         return atk;
     };
     virtual void        receive(const Attack & attack) {
@@ -44,6 +43,7 @@ public:
             if (current_status().health + final_effect.hp_change > default_hp) 
                 final_effect.hp_change = default_hp - current_health;
         }
+        current_health += final_effect.hp_change;
         current_atk += final_effect.atk_buff;
         current_def += final_effect.def_buff;
     }
@@ -58,7 +58,10 @@ public:
         }
         return Point(rand() % 3 - 1, rand() % 3 - 1); // random move; may chase its target (e.g. Player) in the future
     }; 
-    virtual Character * get_target()              { return target; }
+    virtual Character * get_target()              { 
+        if (target != nullptr) is_attacking = true; 
+        return target; 
+    }
     virtual void        set_target(Character * p) { target = p; }
     virtual Character * get_self()                { return self; }
 };
