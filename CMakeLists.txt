@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.16)
-set(CMAKE_C_COMPILER gcc)
-set(CMAKE_CXX_COMPILER g++)
+#set(CMAKE_C_COMPILER gcc)
+#set(CMAKE_CXX_COMPILER g++)
+set(CMAKE_CXX_STANDARD 14)
 set(PROJECT_NAME cc3k)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 project(${PROJECT_NAME})
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR})
+#set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR})
 include_directories( 
     ${PROJECT_SOURCE_DIR}/basic 
     ${PROJECT_SOURCE_DIR}/characters 

@@ -2,7 +2,7 @@
 
 void Display::show(PlayerCharacter * player, int floor_num) {
     //std::cout << "\ec"; // clear terminal
-    std::cout << "\e[H\e[2J"; // move cursor to the upper left
+    std::cout << "\e[H\e[J"; // '\e[H': move cursor to the upper left
     // Show Screen
     screen->display();
     // Show Player Character's Status
