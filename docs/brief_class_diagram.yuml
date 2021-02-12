@@ -1,0 +1,46 @@
+// {type:class}
+// {direction:topDown}
+// {generate:true}
+
+// [Rect]<>-[Point]
+// [Line]<>-[Point]
+
+[<<Item>>]
+[<<Item>>]^-.-[Potion]
+[<<Item>>]^-.-[Gold]
+
+[<<CharacterStategy>>]^-.-[DefaultStrategy]
+[<<CharacterStategy>>]^-.-[NoHealthLimit]
+[<<CharacterStategy>>]^-.-[StrategyDecorator]
+
+[StrategyDecorator]^[Allergic]
+[StrategyDecorator]^[StayStill]
+[StrategyDecorator]^[....]
+
+[<<Character>>]^-.-[RealCharacter]
+[<<Character>>]^-.-[PlayerCharacter]
+
+// [<<CharacterStategy>>]-[RealCharacter]
+
+// [PlayerCharacter]<>-[RealCharacter]
+
+[RealCharacter]^[Shade]
+[RealCharacter]^[Vampire]
+[RealCharacter]^[...]
+[RealCharacter]^[Human]
+[RealCharacter]^[Dragon]
+
+[Floor]<>-[Path]
+[Floor]<>-[Chamber]
+
+[Chamber]<>-[<<Item>>]
+[Chamber]<>-[<<Character>>]
+
+[Game]<>-[PlayerCharacter]
+[Game]<>-[Floor]
+[Game]<>-[Display]
+
+// [Display]-[Floor]
+// [Display]-[Chamber]
+// [Display]-[Path]
+// [Display]-[<<Character>>]
