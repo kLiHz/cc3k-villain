@@ -20,14 +20,14 @@ However, it might be possible for me to introduce ncurses in the future.
 
 ## how to build
 
-Change to the project dir and:
+Change to the project root directory and:
 
 ```bash
-mkdir build
-cd build
+mkdir build && cd build
 cmake ..
-make 
-../cc3k
+make
+make install
+../bin/cc3k
 ```
 
-binary file output path has been set to the `PROJECT_SOURECE_DIR` in `CMakeLists.txt`.
+

@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.16)
-#set(CMAKE_C_COMPILER gcc)
-#set(CMAKE_CXX_COMPILER g++)
+
 set(CMAKE_CXX_STANDARD 14)
-set(PROJECT_NAME cc3k)
+
+set(PROJECT_NAME cc3k-villain)
+
 project(${PROJECT_NAME})
-#set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR})
+
 include_directories( 
     ${PROJECT_SOURCE_DIR}/basic 
     ${PROJECT_SOURCE_DIR}/characters 
@@ -12,6 +13,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/facilities 
     ${PROJECT_SOURCE_DIR}/items 
 )
+
 add_executable(
     cc3k
     ./main.cc
@@ -28,3 +30,5 @@ add_executable(
     ./items/src/gold.cc
     ./items/src/potion.cc
 )
+
+install(TARGETS cc3k DESTINATION ${PROJECT_SOURCE_DIR}/bin)
