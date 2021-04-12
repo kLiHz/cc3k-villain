@@ -1,14 +1,15 @@
-#pragma once
+#ifndef CHAMBER_HPP
+#define CHAMBER_HPP
 
 #include <list>
-#include "../basic/types.hpp"
-#include "../characters/races.hpp"
-#include "../characters/player_character.hpp"
-#include "../items/item.hpp"
-#include "../items/gold.hpp"
-#include "../items/potion.hpp"
-#include "./port.hpp"
-#include "./path.hpp"
+#include "basic/types.hpp"
+#include "characters/races.hpp"
+#include "characters/player_character.hpp"
+#include "items/item.hpp"
+#include "items/gold.hpp"
+#include "items/potion.hpp"
+#include "facilities/port.hpp"
+#include "facilities/path.hpp"
 
 class Chamber 
 {
@@ -40,3 +41,5 @@ public:
     bool push(Character * ch);
     bool push(Item * item, Point assign_pos = Point(-1,-1));
 };
+
+#endif // CHAMBER_HPP

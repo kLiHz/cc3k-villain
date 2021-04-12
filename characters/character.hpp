@@ -1,11 +1,11 @@
 #ifndef CHARACTER_HEADER
 #define CHARACTER_HEADER
 
-#include "./character_interface.hpp"
+#include "characters/character_interface.hpp"
 
-#include "../items/item.hpp"
-#include "../items/potion.hpp"
-#include "../items/gold.hpp"
+#include "items/item.hpp"
+#include "items/potion.hpp"
+#include "items/gold.hpp"
 
 class CharacterStrategy;
 

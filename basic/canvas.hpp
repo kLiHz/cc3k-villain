@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cstring>
 #include <algorithm>
-#include "./figures.hpp"
+#include "basic/figures.hpp"
 
 class Canvas {
     int c_width;

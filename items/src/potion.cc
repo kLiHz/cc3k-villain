@@ -1,4 +1,4 @@
-#include "../potion.hpp"
+#include "items/potion.hpp"
 
 std::vector<std::string>
 Potion::potion_strings = {

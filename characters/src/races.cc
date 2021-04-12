@@ -1,4 +1,4 @@
-#include "../races.hpp"
+#include "characters/races.hpp"
 
 Item * Human::drop_reward(){
     auto g1 = new Gold(Gold::NORMAL);

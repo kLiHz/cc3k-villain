@@ -1,15 +1,13 @@
-#pragma once
-
 #ifndef DISPLAY_HPP
 #define DISPLAY_HPP
 
 #include <iostream>
-#include "../characters/races.hpp"
-#include "../characters/player_character.hpp"
-#include "../basic/canvas.hpp"
-#include "../facilities/floor.hpp"
-#include "../facilities/chamber.hpp"
-#include "../facilities/path.hpp"
+#include "characters/races.hpp"
+#include "characters/player_character.hpp"
+#include "basic/canvas.hpp"
+#include "facilities/floor.hpp"
+#include "facilities/chamber.hpp"
+#include "facilities/path.hpp"
 
 #include <queue>
 

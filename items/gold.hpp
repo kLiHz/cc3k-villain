@@ -1,7 +1,7 @@
 #ifndef _GOLD_HPP_
 #define _GOLD_HPP_
 
-#include "./item.hpp"
+#include "items/item.hpp"
 #include <vector>
 #include <string>
 

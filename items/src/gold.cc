@@ -1,4 +1,4 @@
-#include "../gold.hpp"
+#include "items/gold.hpp"
 
 std::vector<std::string>
 Gold::gold_strings = {

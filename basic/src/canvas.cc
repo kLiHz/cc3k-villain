@@ -1,4 +1,4 @@
-#include "../canvas.hpp"
+#include "basic/canvas.hpp"
 
 Canvas::Canvas(int height, int width) : c_height(height), c_width(width)
 {

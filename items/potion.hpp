@@ -1,7 +1,7 @@
 #ifndef _POTION_HPP_
 #define _POTION_HPP_
 
-#include "./item.hpp"
+#include "items/item.hpp"
 #include <vector>
 #include <string>
 

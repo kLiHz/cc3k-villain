@@ -1,4 +1,4 @@
-#include "../chamber.hpp"
+#include "facilities/chamber.hpp"
 
 Chamber::Chamber(Rect _region, const std::list<Port*> & _ports)
 {

@@ -5,8 +5,8 @@
 #include <string>
 #include <ctime>
 
-#include "./display.hpp"
-#include "../facilities/floor.hpp"
+#include "control/display.hpp"
+#include "facilities/floor.hpp"
 
 typedef PlayerCharacter PC;
 
@@ -33,7 +33,7 @@ public:
         // CHOOSE PLAYER
         if (player) { delete player; player = nullptr; }
         while (!generate_player());
-        if (playing == false) return;
+        if (!playing) return;
         // GENERATE FLOOR
         generate_floor();
         if (display) delete display;

@@ -1,10 +1,11 @@
-#pragma once
+#ifndef FLOOR_HPP
+#define FLOOR_HPP
 
 #include <list>
 #include <map>
 #include <vector>
-#include "./chamber.hpp"
-#include "./path.hpp"
+#include "facilities/chamber.hpp"
+#include "facilities/path.hpp"
 
 class Floor
 {
@@ -43,3 +44,5 @@ private:
     enum Where {CHAMBER, PORT, PATH};
     Where player_where = Where::CHAMBER;
 };
+
+#endif // FLOOR_HPP

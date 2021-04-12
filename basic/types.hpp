@@ -1,5 +1,5 @@
-#ifndef TYPES
-#define TYPES
+#ifndef TYPES_HPP
+#define TYPES_HPP
 
 #include "./effect.hpp"
 #include "./figures.hpp"

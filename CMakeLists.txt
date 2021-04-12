@@ -1,17 +1,14 @@
 cmake_minimum_required(VERSION 3.16)
 
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(PROJECT_NAME cc3k-villain)
 
 project(${PROJECT_NAME})
 
-include_directories( 
-    ${PROJECT_SOURCE_DIR}/basic 
-    ${PROJECT_SOURCE_DIR}/characters 
-    ${PROJECT_SOURCE_DIR}/control 
-    ${PROJECT_SOURCE_DIR}/facilities 
-    ${PROJECT_SOURCE_DIR}/items 
+include_directories(
+    ${PROJECT_SOURCE_DIR}
 )
 
 add_executable(

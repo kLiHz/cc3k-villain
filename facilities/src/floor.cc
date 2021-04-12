@@ -1,4 +1,4 @@
-#include "../floor.hpp"
+#include "facilities/floor.hpp"
 
 void Floor::GenerateSampleFloorTerrain() {
     // std::map use to avoid redefination

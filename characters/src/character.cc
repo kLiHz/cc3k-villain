@@ -1,5 +1,5 @@
-#include "../character.hpp"
-#include "../strategies.hpp"
+#include "characters/character.hpp"
+#include "characters/strategies.hpp"
 
 std::vector<std::string>
 RealCharacter::character_strings = {

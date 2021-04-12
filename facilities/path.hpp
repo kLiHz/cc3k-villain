@@ -1,6 +1,7 @@
-#pragma once
+#ifndef PATH_HPP
+#define PATH_HPP
 
-#include "./port.hpp"
+#include "facilities/port.hpp"
 
 #include <list>
 
@@ -15,3 +16,5 @@ public:
     bool contains(const Point & pos);
     Port * at_port(const Point & pos);
 };
+
+#endif

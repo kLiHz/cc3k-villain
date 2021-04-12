@@ -1,8 +1,8 @@
-#ifndef CHARCTER_HPP
-#define CHARCTER_HPP
+#ifndef CHARACTER_HPP
+#define CHARACTER_HPP
 
-#include "../basic/types.hpp"
-#include "../items/item.hpp"
+#include "basic/types.hpp"
+#include "items/item.hpp"
 
 #include <vector>
 #include <string>

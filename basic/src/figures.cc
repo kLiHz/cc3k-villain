@@ -1,4 +1,4 @@
-#include "../figures.hpp"
+#include "basic/figures.hpp"
 
 Point Point::operator+(const Point & p) const 
 {

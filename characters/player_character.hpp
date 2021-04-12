@@ -1,9 +1,8 @@
-#pragma once
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
 #include <queue>
-#include "./races.hpp"
+#include "characters/races.hpp"
 
 // Decorate Class: PlayerCharacter
 class PlayerCharacter : public Character

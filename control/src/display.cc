@@ -1,4 +1,4 @@
-#include "../display.hpp"
+#include "control/display.hpp"
 
 void Display::show(PlayerCharacter * player, int floor_num) {
     //std::cout << "\ec"; // clear terminal

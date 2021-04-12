@@ -1,4 +1,4 @@
-#include "../game.hpp"
+#include "control/game.hpp"
 
 void Game::welcome() {
     std::cout << "Welcome to play the game of Chamber Crawler 3000 - villain!" << std::endl;

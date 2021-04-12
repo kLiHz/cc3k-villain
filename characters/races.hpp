@@ -1,8 +1,8 @@
 #ifndef RACES_HPP
 #define RACES_HPP
 
-#include "./character.hpp"
-#include "./strategies.hpp"
+#include "characters/character.hpp"
+#include "characters/strategies.hpp"
 
 class Shade : public RealCharacter
 {

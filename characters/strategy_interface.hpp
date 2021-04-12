@@ -1,22 +1,22 @@
-#ifndef STRATEGY_HPP
-#define STRATEGY_HPP
+#ifndef STRATEGY_INTERFACE_HPP
+#define STRATEGY_INTERFACE_HPP
 
-#include "./character.hpp"
+#include "characters/character.hpp"
 
 // All attack and effect from other character should be handled by the character's strategy
 class CharacterStrategy
 {
 protected:
-    // 'apply_effect()' apllies a FINAL "Effect" to the character
+    // 'apply_effect()' applies a FINAL "Effect" to the character
 public:
     enum StrategyType {DEFAULT, BUFFED};
     CharacterStrategy() = default;
     virtual ~CharacterStrategy() = default;
-    // when the character receive an attack, the current "Startegy" should handle it
+    // when the character receive an attack, the current "Strategy" should handle it
     // and returns a FINAL "Effect" which should be exerted directly on the character
     virtual void                receive(const Attack & attack) = 0;
-    // when the character use a potion, the current "Startegy" should handle and modify it
-    // and returns a FINAL "Effect" which should be appiled directly by the character
+    // when the character use a potion, the current "Strategy" should handle and modify it
+    // and returns a FINAL "Effect" which should be applied directly by the character
     virtual void                consume(Item * item) = 0;
     virtual void                apply(const Effect & effect) = 0;
     // return the "Attack" of current strategy

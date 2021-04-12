@@ -1,6 +1,7 @@
-#pragma once
+#ifndef PORT_HPP
+#define PORT_HPP
 
-#include "../basic/types.hpp"
+#include "basic/types.hpp"
 
 class Path;
 class Chamber;
@@ -15,3 +16,5 @@ public:
     Port(int _row, int _col) : position(_row, _col) {}
     Port(const Point & pos) : position(pos) {}
 };
+
+#endif PORT_HPP

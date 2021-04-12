@@ -13,7 +13,7 @@
 //             | |____| | | (_| |\ V  V /| |  __/ |   
 //              \_____|_|  \__,_| \_/\_/ |_|\___|_|   
 //                              ____   ___   ___   ___  
-//                             |___ \ / _ \ / _ \ / _ \ 
+//                             |___ \ / _ \ / _ \ / _ \ .
 //                               __) | | | | | | | | | |
 //                              |__ <| | | | | | | | | |
 //                              ___) | |_| | |_| | |_| |
@@ -24,7 +24,7 @@
 
 #include <iostream>
 #include <vector>
-#include "./control/game.hpp"
+#include "control/game.hpp"
 
 int main(int argc, char * argv[] ) 
 {
@@ -35,7 +35,7 @@ int main(int argc, char * argv[] )
         tokens.push_back(std::string(argv[i]));
     }
     for (auto t : tokens) {
-        if (t[1] < 9 && t[1] > 0) {
+        if (std::isdigit(t[0])) {
             if (seed_found) continue;
             seed_found = true;
             inst = new Game(t);

@@ -1,4 +1,4 @@
-#include "../player_character.hpp"
+#include "characters/player_character.hpp"
 
 PlayerCharacter::~PlayerCharacter() { delete its_character; }
 

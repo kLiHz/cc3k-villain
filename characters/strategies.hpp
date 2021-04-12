@@ -1,7 +1,7 @@
-#ifndef STRATEGIES
-#define STRATEGIES
+#ifndef STRATEGIES_HPP
+#define STRATEGIES_HPP
 
-#include "./strategy_interface.hpp"
+#include "characters/strategy_interface.hpp"
 
 #include <iostream>
 

@@ -1,7 +1,7 @@
 #ifndef _ITEM_HPP_
 #define _ITEM_HPP_
 
-#include "../basic/types.hpp"
+#include "basic/types.hpp"
 
 class Item {
 public:
