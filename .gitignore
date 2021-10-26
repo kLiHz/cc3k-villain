@@ -1,13 +1,11 @@
 .vs
 .vscode
-build
-build-vcxx
-[Dd]ebug
-[Rr]lease
-.idea
-cmake-build-debug
-cmake-build-release
-bin
+.idea/
+
+*build*/
+bin/
+[Dd]ebug/
+[Rr]lease/
 
 *.o
 *.obj
