@@ -9,6 +9,6 @@ struct CharacterStatus {
     CharacterStatus(int _h, int _a, int _d) : health(_h), atk(_a), def(_d) {}
 };
 
-typedef CharacterStatus CStatus;
+using CStatus = CharacterStatus;
 
 #endif

@@ -31,6 +31,7 @@ public:
     virtual void                set_target(Character * p) = 0;
     virtual Character *         get_self() = 0;
 };
-typedef CharacterStrategy CStrategy;
+
+using CStrategy = CharacterStrategy;
 
 #endif

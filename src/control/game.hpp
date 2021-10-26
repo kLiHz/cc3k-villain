@@ -10,7 +10,7 @@
 #include "display.hpp"
 #include "facilities/floor.hpp"
 
-typedef PlayerCharacter PC;
+using PC = PlayerCharacter;
 
 class Game
 {
